@@ -5,6 +5,6 @@ function hitungUmur($thn_lahir, $thn_sekrang){
     return $umur;
 }
 
-echo "umur saya adalah ". hitungUmur(1988, 2023) ."tahun"
+echo "umur saya adalah ". hitungUmur(1988, 2024) ."tahun"
 
 ?>
