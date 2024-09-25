@@ -8,7 +8,7 @@
 
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST['fname'];
+        $name = $_REQUEST['fname'];
         if (empty($name)) {
             echo "Name is empty";
         } else {
@@ -16,6 +16,6 @@
         }
     }
     ?>
-
+    
     </body>
 </html>
