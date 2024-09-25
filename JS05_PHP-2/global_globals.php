@@ -1,4 +1,5 @@
 <?php
+
 $x = 75;
 $y = 25;
 
@@ -8,4 +9,5 @@ function addition() {
 
 addition();
 echo $z;
+
 ?>
