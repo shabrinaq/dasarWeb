@@ -6,7 +6,12 @@
         <script>
             $(document).ready(function() {
                 $("button").click(function() {
-                    $("div").animate({left: 300});
+                    $(".box")
+                    .animate({width: "300px"})
+                    .animate({height: "300px"})
+                    .animate({marginLeft: "150px"})
+                    .animate({borderwidth: "10px"})
+                    .animate({opacity: 0.5});
                 });
             });
         </script>
