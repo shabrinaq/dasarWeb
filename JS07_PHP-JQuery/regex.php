@@ -1,9 +1,9 @@
 <?php
-$pattorn = '/[a-z]/';
-$text = 'This is a Sample Text.';
-if (preg_match($pattorn, $text)) {
-    echo "Huruf kecil ditemukan!";
+$pattorn = '/[0-9]+/';
+$text = 'There  are 123 apples.';
+if (preg_match($pattorn, $text, $matches)) {
+    echo "Cocokkan: " . $matches[0];
 } else {
-    echo "Tidak ada huruf kecil!";
+    echo "Tidak ada yang cocok!";
 }
 ?>
