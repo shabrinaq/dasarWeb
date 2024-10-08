@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Form Input dengan Validasi</title>
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     </head>
     <body>
         <h1>Form Input dengan Validasi</h1>
@@ -40,10 +40,15 @@
                         $("#email-error").text("");
                     }
 
-                    if (valid) {
-                        (!event.preventDefault());
+                    if (!valid) {
+                        event.preventDefault();
                     }
                 });
+
+                function validateEmail(email) {
+                    var re = /^[^\s@]+@[^\s@]+\.[^\s@]+&/;
+                    return re.test(String(email).toLowerCase());
+                }
             });
         </script>
     </body>
