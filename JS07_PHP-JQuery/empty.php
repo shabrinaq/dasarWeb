@@ -1,6 +1,5 @@
-$myArray = array();
-if (empty($myArray)) {
-    echo "array tidak terdefinisi atau kosong.";
+if (empty($nonExistentVar)) {
+    echo "Variabel tidak terdefinisi atau kosong.";
 } else {
-    echo "array terdefinisi dan tidak kosong.";
+    echo "Variabel terdefinisi dan tidak kosong.";
 }
