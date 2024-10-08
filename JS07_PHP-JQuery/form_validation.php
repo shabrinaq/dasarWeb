@@ -5,13 +5,14 @@
     </head>
     <body>
         <h1>Form Input dengan Validasi</h1>
-        <form method="post" action="proses_validasi.php">
+        <form method="post" action="form_validation.php">
             <label for="nama">Nama:</label>
             <input type="text" id="nama" name="nama">
             <br>
 
-            <label for="email">Email;</label>
-            <input type="text" id="nama" name="nama">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <br>
             <br>
 
             <input type="submit" value="Submit">
@@ -39,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo $error . "<br>";
         }
     } else {
-        echo "Data berhasil dikirim: Nama ="
+        echo "Data berhasil dikirim: Nama =$nama, Email = $email";
     }
-    
 }
+?>
