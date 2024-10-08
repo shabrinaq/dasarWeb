@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Contoh Form dengan PHP dan jQuery</title>
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     </head>
     <body>
         <h2>Form Contoh</h2>
@@ -32,6 +32,7 @@
 
             <input type="submit" value="Submit">
         </form>
+        hasil
 
         <div id="hasil">
             <!-- Hasil akan ditampilkan di sini -->
@@ -39,19 +40,21 @@
 
         <script>
             $(document).ready(function () {
-                $("#myform").submit(function (e) {
+                $("#myForm").submit(function (e) {
                     e.preventDefault();
+                    console.log(e);
 
                     var formData = $("#myForm").serialize();
 
                     $.ajax({
-                        url; "proses_lanjut.php",
+                        url: "form_next.php",
                         type: "POST",
                         data: formData,
                         success: function (response) {
                             $("#hasil").html(response);
                         }
                     });
+                    return false;
                 });
             });
         </script>
