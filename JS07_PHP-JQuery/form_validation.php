@@ -14,6 +14,10 @@
         <label for="email">Email:</label>
         <input type="text" id="email" name="email">
         <span id="email-error" style="color: red;"></span><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+        <span id="password-error" style="color: red;"></span><br>
         <br>
 
         <input type="submit" value="Submit">
@@ -30,10 +34,12 @@
 
                 var nama = $("#nama").val();
                 var email = $("#email").val();
+                var password = $("#password").val();
                 var valid = true;
 
                 $("#nama-error").text("");
                 $("#email-error").text("");
+                $("#password-error").text("");
 
                 if (nama === "") {
                     $("#nama-error").text("Nama harus diisi.");
@@ -48,13 +54,22 @@
                     valid = false;
                 }
 
+                if (password === "") {
+                    $("#password-error").text("Password harus diisi.");
+                    valid = false;
+                } else if (password.length < 8) {
+                    $("#password-error").text("Password harus terdiri dari minimal 8 karakter.");
+                    valid = false;
+                }
+
                 if (valid) {
                     $.ajax({
                         url: "form_validation.php", 
                         type: "POST",
                         data: {
                             nama: nama,
-                            email: email
+                            email: email,
+                            password: password
                         },
                         success: function(response) {
                             $("#hasil").html(response); 
@@ -78,6 +93,7 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nama = $_POST['nama'];
     $email = $_POST['email'];
+    $password = $_POST['password'];
     $errors = array();
 
     if (empty($nama)) {
@@ -90,6 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $errors[] = "Format email tidak valid.";
     }
 
+    if (empty($password)) {
+        $errors[] = "Password harus diisi.";
+    } elseif (strlen($password) < 8) {
+        $errors[] = "Password harus terdiri dari minimal 8 karakter.";
+    }
+
     if (!empty($errors)) {
         foreach ($errors as $error) {
             echo $error . "<br>"; 
@@ -98,6 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "Data berhasil dikirim:<br>";
         echo "Nama: $nama<br>";
         echo "Email: $email<br>";
+        echo "Password: $password<br>";
     }
 }
 ?>
