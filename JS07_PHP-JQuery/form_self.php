@@ -18,7 +18,7 @@
             }
         }
         ?>
-        <form method="psot" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="nama">Nama:</label>
             <input type="text" name="nama" id="nama" value="<?php echo $nama; ?>">
             <span class="error"><?php echo $namaErr; ?></span><br><br>
