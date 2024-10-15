@@ -2,12 +2,15 @@
 <html>
 
     <head>
-        <title>Unggah File Dokumen</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Unggah File Dokumen Image</title>
     </head>
 
     <body>
-        <form id="upload-form" action="upload_ajax.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" id="file">
+        <h3>Unggah File Documen Image</h3>
+            <form id="upload-form" action="upload_ajax.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="files[]" id="file" multiple required>
             <input type="submit" name="submit" value="Unggah">
         </form>
         <div id="status"></div>
