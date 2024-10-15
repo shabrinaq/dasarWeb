@@ -1,6 +1,6 @@
 <?php
 if (isset($_FILES['file'])) {
-    $error = array();
+    $errors = array();
     $file_name = $_FILES['file']['name'];
     $file_size = $_FILES['file']['size'];
     $file_tmp = $_FILES['file']['tmp_name'];
@@ -9,7 +9,7 @@ if (isset($_FILES['file'])) {
     $extensions = array("pdf", "doc", "docx", "txt");
 
     if (in_array($file_ext, $extensions) === false) {
-        $error[] = "Ekstensi file yang diizinkan adalah PDF, DOC, DOX, atau TXT.";
+        $errors[] = "Ekstensi file yang diizinkan adalah PDF, DOC, DOX, atau TXT.";
     }
 
     if ($file_size > 2097152) {
