@@ -16,7 +16,7 @@
         <body>
             <nav class="navbar navbar-expand-md navbar-dark bg-dark">
                 <img src="Shabrina.jpg" alt="Logo" style="width:40px; margin-right:10px;">
-                <a class="navbar-brand" href="#">Nada's Site</a>
+                <a class="navbar-brand" href="#">Nada Home</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -31,27 +31,37 @@
                     <input class="form-control mr-sm-2" type="text" placeholder="Search">
                     <button class="btn btn-custom" type="submit">Search</button>
                 </form>
-
-                <!-- Toggler/collapsibe Button -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
             </nav>    
+
             <div class="container mt-4 justify-content-center">
                 <div class="d-flex justify-content-center">
-                    <img src="Shabrina.jpg" class="rounded-circle" alt="center">
+                    <img src="Shabrina.jpg" class="rounded-circle profile-img" alt="center">
                 </div>
+
                 <div class="jumbotron mt-4">
-                    <h1 class="display-4">Selamat Datang!</h1>
-                    <p class="lead">Halo...</p>
-                    <p class="lead">Ini adalah percobaan jumbotron Nada menggunakan Bootstrap</p>
-                    <p class="lead">Mata Kuliah Pemrograman Web</p>
-                    <p class="lead">Shabrina Qottrunnada_234176016_D4SIB-2G</p>
+                    <h1 class="display-4">Welcome!</h1>
+                    <p class="lead">Hello...</p>
+                    <p class="lead">This is a Nada jumbotron experiment using Bootstrap</p>
+                    <p class="lead">Programming Practicum Course</p>
+                    <p class="lead">D4SIB-2G_21_2341760160_Shabrina Qottrunnada</p>
+                    <br>
+                    <!-- Teks panjang biodata -->
+                    <p class="mt-4" style="text-align: justify;"> 
+                        Hello everyone, introducing my name Shabrina Qottrunnada and usually called Nada. 
+                        I am a student majoring in “Information Technology” in the “D4 Business Information Systems” Study Program,
+                        I am a student majoring in “Information Technology” in the “D4 Business Information Systems” Study Program,
+                        Di kampus, saya mengikuti himpunan jurusan yaitu Himpunan Mahasiswa Teknologi Informasi atau HMTI. On campus, 
+                        I joined the departmental association, namely the Information Technology Student Association or HMTI. In this 
+                        unfortunate city, I live with my brother who is in the sawojajar 2 area, which coincides in the Springhill 
+                        Garden Housing, gardenia street no.2, Malang. I have various hobbies, namely I really like playing the piano 
+                        and singing, when I go back to my hometown, I never skip to not play the piano. I also like to listen to music, 
+                        maybe almost every day I always listen to music, usually when doing assignments or so. doing assignments or so.
+                    </p>
                 </div>
 
                 <!-- Alert dengan tombol close -->
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Perhatian!</strong> tombol untuk menutupnya.
+                    <strong>Attention!</strong> button to close it.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -60,29 +70,29 @@
                 <!-- Card untuk informasi tambahan -->
                 <div class="card mt-4">
                     <div class="card-header">
-                        Info Tambahan
+                        Additional Information
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Kontak Kami</h5>
-                        <p class="card-text">Jika Anda memiliki pertanyaan, silakan hubungi kami di bawah ini!</p>
-                        <button class="btn btn-custom" data-toggle="modal" data-target="#contactModal">Detail Kontak</button> <!-- Tombol dengan data-toggle dan data-target -->
+                        <h5 class="card-title">Contact Us</h5>
+                        <p class="card-text">If you have any questions, please contact us below!</p>
+                        <button class="btn btn-custom" data-toggle="modal" data-target="#contactModal">Contact Details</button> <!-- Tombol dengan data-toggle dan data-target -->
                     </div>
                 </div>
-
+                
                 <!-- Modal untuk Detail Kontak -->
                 <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="contactModalLabel">Detail Kontak</h5>
+                                <h5 class="modal-title" id="contactModalLabel">Contact Details</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
                                 <p>Email : shabrinaqottrunnada@gmail.com</p>
-                                <p>Telepon : 085 733 297 330</p>
-                                <p>Alamat : Perum. Springhill Garden, Jl. Gardenia No.2, Malang</p>
+                                <p>Number : 085 733 297 330</p>
+                                <p>Address : Perum. Springhill Garden, Jl. Gardenia No.2, Malang</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-custom" data-dismiss="modal">Close</button>
