@@ -1,0 +1,25 @@
+/* styles.css */
+body {
+    font-family: 'Roboto', sans-serif; /* Gaya tulisan */
+    background-color: #536e8a; /* Warna latar belakang */
+
+}
+.jumbotron {
+    background-color: #384d62; /* Warna latar belakang jumbotron */
+    color: rgb(255, 254, 254); /* Warna teks di jumbotron */
+}
+.card:hover {
+    transform: scale(1.05); /* Membesarkan card saat hover */
+}
+.navbar {
+    margin-bottom: 20px; /* Memberi jarak di bawah navbar */
+}
+.rounded-circle {
+    width: 350px; /* lebar gambar  */
+    height: 350px; /* tinggi gambar  */
+}
+.btn-custom {
+    background-color: #28a745; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    opacity: 1; /* biar tidak transparan */
+}
