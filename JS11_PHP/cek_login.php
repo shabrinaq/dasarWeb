@@ -32,4 +32,3 @@ if ($salt !== null && $hashed_password !== null) {
     pesan('warning', "Username tidak ditemukan.");
     header("Location: login.php");
 }
-//prac 1
