@@ -7,7 +7,7 @@
     <body>
         <div class="container">
             <h2>Add Member Data</h2>
-            <form action="proses.php?action=tambah" method="post">
+            <form action="proses.php?action=tambah" method="POST">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" required>
                 <label for="gender">Gender:</label>

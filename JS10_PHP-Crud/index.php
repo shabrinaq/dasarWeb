@@ -47,7 +47,7 @@
     function confirmDelete(id, name) {
         var confirmDelete = confirm("Are you sure you want to delete the data for Name = " + name + "?");
         if (confirmDelete) {
-            window.location.href = "proses.php?aksi=hapus&id=" + id;
+            window.location.href = "proses.php?action=delete&id=" + id;
         }
     }
     </script>
