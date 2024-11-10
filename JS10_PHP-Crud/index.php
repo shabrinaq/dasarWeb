@@ -2,54 +2,76 @@
 <html>
 <head>
     <title>Member Data</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Member Data</h2>
-        <a href="create.php" class="btn-tambah">Add Member</a>
-        <br>
+<div class="container mt-4">
+    <h2>Member Data</h2>
+    <a class="btn btn-success mt-2" href="create.php">Add Data</a>
+    <br><br>
+    <?php
+    include('koneksi.php');
+    $query = "SELECT * FROM anggota ORDER BY id DESC";
+    $result = mysqli_query($koneksi, $query);
+    ?>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
         <?php
-        include("koneksi.php");
-
-        $query = "SELECT * FROM member ORDER BY id desc";
-        $result = mysqli_query($koneksi, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            $no = 1;
-            echo "<table>";
-            echo "<tr>
-                <th>No</th><th>Name</th><th>Gender</th>
-                <th>Address</th><th>Phone No.</th><th>Action</th></tr>";
-            while ($row = mysqli_fetch_array($result)) {
-                $gender = ($row['gender'] == 'L') ? 'Male' : 'Female';
-                echo "<tr>
-                    <td>" . $no++ . "</td>
-                    <td>" . $row['name'] . "</td>
-                    <td>" . $gender . "</td>
-                    <td>" . $row['address'] . "</td>
-                    <td>" . $row['phone_number'] . "</td>
-                    <td>
-                        <a href='edit.php?id=" . $row['id'] . "'>Edit</a> |
-                        <a href='#' onclick='confirmDelete(" . $row['id'] . ", \"" . $row['name'] . "\")'>Delete</a>
-                    </td>
-                    </tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "<p>No data available.</p>";
-        }
-        mysqli_close($koneksi);
+        $no = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+            $gender = ($row["jenis_kelamin"] == 'L') ? 'Male' : 'Female';
         ?>
-    </div>
+        <tr>
+            <td><?= $no++ ?></td>
+            <td><?= $row["name"] ?></td>
+            <td><?= $gender ?></td>
+            <td><?= $row["address"] ?></td>
+            <td><?= $row["phone_number"] ?></td>
+            <td>
+                <a class="btn btn-primary" href="edit.php?id=<?= $row["id"] ?>">Edit</a>
+                <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#deleteModal<?= $row["id"] ?>">Delete</a>
+            </td>
+        </tr>
 
-    <script>
-    function confirmDelete(id, name) {
-        var confirmDelete = confirm("Are you sure you want to delete the data for Name = " + name + "?");
-        if (confirmDelete) {
-            window.location.href = "proses.php?action=delete&id=" + id;
+        <div class="modal fade" id="deleteModal<?= $row["id"] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <?= "Are you sure you want to delete the data for " . $row["name"] . "?" ?>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-danger" href="proses.php?aksi=hapus&id=<?= $row["id"] ?>">Delete</a>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php
         }
-    }
-    </script>
+        ?>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
