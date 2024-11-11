@@ -59,3 +59,44 @@
         $('#example').DataTable();
     });
 </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#example').DataTable();
+    }
+        );
+        function reset() {
+            document.getElementById("err_name").innerHTML = "";
+            document.getElementById("err_gender").innerHTML = "";
+            document.getElementById("err_address").innerHTML = "";
+            document.getElementById("err_phone_number").innerHTML = "";
+        }
+
+        $(document).on('click', '.edit_data', function() {
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+            var id = $(this).attr('id');
+            $.ajax({
+                type: 'POST',
+                url: "get_data.php",
+                data: { id: id },
+                dataType: 'json',
+                success: function(response) {
+                    reset();
+                    $('html, body').animate({ scrollTop: 30 }, 'slow');
+                    document.getElementById("id").value = response.id;
+                    document.getElementById("name").value = response.name;
+                    document.getElementById("address").value = response.address;
+                    document.getElementById("phone_number").value = response.phone_number;
+                    
+                    if (response.jenis_kelamin == "L") {
+                        document.getElementById("gender1").checked = true;
+                    } else {
+                        document.getElementById("gender2").checked = true;
+                    }
+                },
+                error: function(response) {
+                    console.log(response.responseText);
+                }
+            });
+        });
+</script>
+
