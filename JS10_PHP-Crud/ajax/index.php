@@ -21,39 +21,42 @@ include 'auth.php';
     </nav>
     <div class="container">
         <div align="center" style="margin: 30px;">Member Data</div>
-        <form method="post" id="form-data">
+        <form method="post" class="form-data" id="form-data">
             <div class="row">
-                <div class="col-sm-3">
-                    <label>Name</label>
-                </div>
                 <div class="col-sm-9">
                     <div class="form-group">
-                        <input type="text" name="id" id="id" hidden>
+                        <label for="name">Name</label>
+                        <input type="hidden" name="id" id="id">
                         <input type="text" name="name" id="name" class="form-control" required="true">
+                        <p class="text-danger" id="err_name"></p>
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <label>Gender</label>
-                </div>
-                <div class="col-sm-9">
                     <div class="form-group">
+                        <label>Gender</label><br>
                         <input type="radio" name="gender" id="gender1" value="L" required="true"> Male
                         <input type="radio" name="gender" id="gender2" value="P"> Female
                     </div>
+                    <p class="text-danger" id="err_gender"></p>
                 </div>
-                <div class="form-group">
-                    <label>Address</label>
-                    <textarea name="address" id="address" class="form-control" required="true"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Phone Number</label>
-                    <input type="number" name="phone_number" id="phone_number" class="form-control" required="true">
-                </div>
-                <div class="form-group">
-                    <button type="button" name="save" id="save" class="btn btn-primary">
-                        <i class="fa fa-save"></i> Save
-                    </button>
-                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" id="address" class="form-control" required="true"></textarea>
+                <p class="text-danger" id="err_address"></p>
+            </div>
+
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="number" name="phone_number" id="phone_number" class="form-control" required="true">
+                <p class="text-danger" id="err_phone_number"></p>
+            </div>
+
+            <div class="form-group">
+                <button type="button" name="save" id="save" class="btn btn-primary">
+                    <i class="fa fa-save"></i> Save
+                </button>
             </div>
         </form>
         <div class="data"></div>
@@ -75,6 +78,58 @@ include 'auth.php';
                 }
             });
             $('.data').load('data.php');
+        
+            $("#save").click(function(){
+                var data = $('.form-data').serialize();
+                var name = document.getElementById("name").value;
+                var address = document.getElementById("address").value;
+                var phone_number = document.getElementById("phone_number").value;
+
+                // Validasi Nama
+                if (name=="") {
+                    document.getElementById("err_name").innerHTML = "Name is required";
+                } else {
+                    document.getElementById("err_name").innerHTML = "";
+                }
+
+                // Validasi Alamat
+                if (address=="") {
+                    document.getElementById("err_address").innerHTML = "Address is required";
+                } else {
+                    document.getElementById("err_address").innerHTML = "";
+                }
+
+                // Validasi Gender
+                if (document.getElementById("gender1").checked==false && document.getElementById("gender2").checked == false) {
+                    document.getElementById("err_gender").innerHTML = "Gender must be selected";
+                } else {
+                    document.getElementById("err_gender").innerHTML = "";
+                }
+
+                // Validasi Nomor Telepon
+                if (phone_number=="") {
+                    document.getElementById("err_phone_number").innerHTML = "Phone number is required";
+                } else {
+                    document.getElementById("err_phone_number").innerHTML = "";
+                }
+
+                // Kirim data jika semua validasi berhasil
+                if (name!="" && address != "" && (document.getElementById("gender1").checked == true || document.getElementById("gender2").checked == true) && phone_number != "") {
+                    $.ajax({
+                        type: 'POST',
+                        url: "form_action.php",
+                        data: data,
+                        success: function() {
+                            $('.data').load("data.php");
+                            document.getElementById("id").value = "";
+                            document.getElementById("form-data").reset();
+                        }, 
+                        error: function(response) {
+                            console.log(response.responseText);
+                        }
+                    });
+                }
+            });
         });
     </script>
 </body>
