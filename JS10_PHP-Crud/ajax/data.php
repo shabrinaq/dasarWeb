@@ -57,11 +57,6 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#example').DataTable();
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#example').DataTable();
     }
         );
         function reset() {
@@ -85,9 +80,8 @@
                     document.getElementById("id").value = response.id;
                     document.getElementById("name").value = response.name;
                     document.getElementById("address").value = response.address;
-                    document.getElementById("phone_number").value = response.phone_number;
-                    
-                    if (response.jenis_kelamin == "L") {
+                    document.getElementById("phone_number").value = response.phone_number;   
+                    if (response.gender == "L") {
                         document.getElementById("gender1").checked = true;
                     } else {
                         document.getElementById("gender2").checked = true;
@@ -98,5 +92,20 @@
                 }
             });
         });
-</script>
 
+        $(document).on('click', '.hapus_data', function() {
+            var id = $(this).attr('id');
+            if (confirm("Are you sure you want to delete this data?")) {
+                $.ajax({
+                    type: 'POST',
+                    url: "hapus_data.php",
+                    data: { id: id },
+                    success: function() {
+                        location.reload();
+                    }, error: function(response) {
+                        console.log(response.responseText);
+                    }
+                });
+            }
+        });
+</script>
