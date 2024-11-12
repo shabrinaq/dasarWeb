@@ -15,11 +15,11 @@ class Animal {
         return $this->name;
     }
 
-    protected function getAge() {
+    public function getAge() {
         return $this->age;
     }
 
-    private function getColor() {
+    public function getColor() {
         return $this->color;
     }
 }
