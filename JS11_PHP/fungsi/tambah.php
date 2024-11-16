@@ -5,7 +5,6 @@ if (!empty($_SESSION['username'])) {
     require '../fungsi/pesan_kilat.php';
     require '../fungsi/anti_injection.php';
 
-    // Handling addition for jabatan
     if (!empty($_GET['jabatan']) && $_GET['jabatan'] === 'tambah') {
         $jabatan = antiInjection($koneksi, $_POST['jabatan']);
         $keterangan = antiInjection($koneksi, $_POST['keterangan']);
@@ -20,7 +19,6 @@ if (!empty($_SESSION['username'])) {
         exit;
     }
 
-    // Handling addition for anggota
     elseif (!empty($_GET['anggota']) && $_GET['anggota'] === 'tambah') {
         $username = antiInjection($koneksi, $_POST['username']);
         $password = antiInjection($koneksi, $_POST['password']);
@@ -31,12 +29,10 @@ if (!empty($_SESSION['username'])) {
         $alamat = antiInjection($koneksi, $_POST['alamat']);
         $no_telp = antiInjection($koneksi, $_POST['no_tel']);
 
-        // Generate salt and hash password
         $salt = bin2hex(random_bytes(6));
         $combined_password = $salt . $password;
         $hashed_password = password_hash($combined_password, PASSWORD_BCRYPT);
 
-        // Insert user data
         $query = "INSERT INTO user (username, password, salt, level) VALUES ('$username', '$hashed_password', '$salt', '$level')";
 
         if (mysqli_query($koneksi, $query)) {
@@ -57,6 +53,6 @@ if (!empty($_SESSION['username'])) {
         exit;
     }
 } else {
-    header('Location: ../index.php'); // Redirect to login if not authenticated
+    header('Location: ../index.php'); 
     exit;
 }
