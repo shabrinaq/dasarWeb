@@ -1,81 +1,139 @@
-<?php
-// Koneksi ke database
-$conn = new mysqli('localhost', 'root', '', 'dasar_web');
+<section class="content-header"> 
+    <div class="container-fluid"> 
+        <div class="row mb-2"> 
+            <div class="col-sm-6"> 
+                <h1>Data Buku</h1> 
+            </div> 
+            <div class="col-sm-6"> 
+                <ol class="breadcrumb float-sm-right"> 
+                    <li class="breadcrumb-item"><a href="#">Home</a></li> 
+                    <li class="breadcrumb-item active">Buku</li> 
+                </ol> 
+            </div> 
+        </div> 
+    </div> 
+</section>
 
-// Periksa koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
-}
+<section class="content"> 
+    <div class="card"> 
+        <div class="card-header"> 
+            <h3 class="card-title">Daftar Buku</h3> 
+            <div class="card-tools"> 
+                <button type="button" class="btn btn-md btn-primary" onclick="tambahData()"> 
+                  Tambah Buku 
+                </button> 
+            </div> 
+        </div> 
+        <div class="card-body"> 
+            <table class="table table-sm table-bordered table-striped" id="table-data"> 
+                <thead> 
+                    <tr> 
+                        <th>No</th> 
+                        <th>Kode Buku</th> 
+                        <th>Nama Buku</th> 
+                        <th>Kategori</th> 
+                        <th>Jumlah</th> 
+                        <th>Deskripsi</th> 
+                        <th>gambar</th> 
+                        <th>Aksi</th> 
+                    </tr> 
+                </thead> 
+                <tbody> 
+                </tbody> 
+            </table> 
+        </div> 
+    </div> 
+</section> 
 
-// Tambah data
-if (isset($_POST['add'])) {
-    $kategori_id = $_POST['kategori_id'];
-    $buku_kode = $_POST['buku_kode'];
-    $buku_nama = $_POST['buku_nama'];
-    $jumlah = $_POST['jumlah'];
-    $deskripsi = $_POST['deskripsi'];
-    $gambar = $_POST['gambar'];
+<!-- Modal Form for Add/Edit Book -->
+<div class="modal fade" id="form-data" style="display: none;" aria-hidden="true"> 
+    <form action="action/bukuAction.php?act=save" method="post" id="form-tambah"> 
+        <div class="modal-dialog modal-md"> 
+            <div class="modal-content"> 
+                <div class="modal-header"> 
+                    <h4 class="modal-title">Tambah Buku</h4> 
+                </div> 
+                <div class="modal-body"> 
+                    <div class="form-group"> 
+                        <label>Kode Buku</label> 
+                        <input type="text" class="form-control" name="buku_kode" id="buku_kode"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label>Nama Buku</label> 
+                        <input type="text" class="form-control" name="buku_nama" id="buku_nama"> 
+                    </div> 
+                    <div class="form-group">
+    <label for="kategori_id">Kategori Buku</label>
+    <select class="form-control" name="kategori_id" id="kategori_id">
+        <option value="" disabled selected>Pilih Kategori Buku</option>
+        <option value="FKS">Fiksi</option>
+        <option value="NVL">Novel</option>
+        <option value="ILM">Ilmiah</option>
+        <option value="MTR">Misteri</option>
+        <option value="SSL">Sosial</option>
+        <option value="LKK">LKK</option>
+    </select>
+</div>
 
-    $sql = "INSERT INTO buku (kategori_id, buku_kode, buku_nama, jumlah, deskripsi, gambar) 
-            VALUES ('$kategori_id', '$buku_kode', '$buku_nama', '$jumlah', '$deskripsi', '$gambar')";
-    $conn->query($sql);
-}
+                    <div class="form-group"> 
+                        <label>Jumlah</label> 
+                        <input type="number" class="form-control" name="jumlah" id="jumlah"> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label>Deskripsi</label> 
+                        <textarea class="form-control" name="deskripsi" id="deskripsi"></textarea> 
+                    </div> 
+                    <div class="form-group"> 
+                        <label>Gambar</label> 
+                        <input type="text" class="form-control" name="gambar" id="gambar"> 
+                    </div> 
+                    <input type="hidden" name="id" id="buku_id"> 
+                </div> 
+                <div class="modal-footer justify-content-between"> 
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button> 
+                    <button type="submit" class="btn btn-primary">Simpan</button> 
+                </div> 
+            </div> 
+        </div> 
+    </form> 
+</div>
 
-// Hapus data
-if (isset($_GET['delete'])) {
-    $buku_id = $_GET['delete'];
-    $conn->query("DELETE FROM buku WHERE buku_id = $buku_id");
-}
+<script>
+    function tambahData() {
+        $('#form-data').modal('show');
+        $('#form-tambah').attr('action', 'action/bukuAction.php?act=save');
+    }
 
-// Ambil data
-$result = $conn->query("SELECT * FROM m_buku");
-?>
+    function editData(id) {
+        $.get('action/bukuAction.php?act=get&id=' + id, function(data) {
+            $('#buku_kode').val(data.buku_kode);
+            $('#buku_nama').val(data.buku_nama);
+            $('#jumlah').val(data.jumlah);
+            $('#deskripsi').val(data.deskripsi);
+            $('#gambar').val(data.gambar);
+            $('#buku_id').val(data.buku_id);
+            $('#form-data').modal('show');
+            $('#form-tambah').attr('action', 'action/bukuAction.php?act=update&id=' + id);
+        });
+    }
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <title>Manajemen Buku</title>
-</head>
-<body>
-    <h2>Daftar Buku</h2>
+    function deleteData(id) {
+        if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
+            $.get('action/bukuAction.php?act=delete&id=' + id, function(data) {
+                alert(data.message);
+                table.ajax.reload();
+            });
+        }
+    }
 
-    <!-- Form Tambah Buku -->
-    <form method="post">
-        <input type="text" name="kategori_id" placeholder="ID Kategori" required>
-        <input type="text" name="buku_kode" placeholder="Kode Buku" required>
-        <input type="text" name="buku_nama" placeholder="Nama Buku" required>
-        <input type="number" name="jumlah" placeholder="Jumlah" required>
-        <textarea name="deskripsi" placeholder="Deskripsi"></textarea>
-        <input type="text" name="gambar" placeholder="URL Gambar">
-        <button type="submit" name="add">Tambah</button>
-    </form>
-
-    <!-- Tabel Data Buku -->
-    <table border="1">
-        <tr>
-            <th>ID Buku</th>
-            <th>ID Kategori</th>
-            <th>Kode Buku</th>
-            <th>Nama Buku</th>
-            <th>Jumlah</th>
-            <th>Deskripsi</th>
-            <th>Gambar</th>
-            <th>Aksi</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['buku_id'] ?></td>
-                <td><?= $row['kategori_id'] ?></td>
-                <td><?= $row['buku_kode'] ?></td>
-                <td><?= $row['buku_nama'] ?></td>
-                <td><?= $row['jumlah'] ?></td>
-                <td><?= $row['deskripsi'] ?></td>
-                <td><?= $row['gambar'] ?></td>
-                <td>
-                    <a href="?page=buku&delete=<?= $row['buku_id'] ?>">Hapus</a>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
-</body>
-</html>
+    $(document).ready(function() {
+        table = $('#table-data').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "action/bukuAction.php?act=load",
+                "type": "GET"
+            }
+        });
+    });
+</script>
